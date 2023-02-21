@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: test-component-moxr
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test-component-moxr
+    app.kubernetes.io/part-of: test-app-nbwd
+  name: test-component-moxr
+  namespace: build-e2e-iixe-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+      app.kubernetes.io/instance: test-component-moxr
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python-app
+        app.kubernetes.io/instance: test-component-moxr
+    spec:
+      containers:
+      - image: quay.io/rh_ee_tnevrlka/test-images:7cb4ff4fb2714a878816a74e853c3c69
+        name: my-python
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+status: {}
